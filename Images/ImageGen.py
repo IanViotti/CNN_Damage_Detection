@@ -40,7 +40,8 @@ def GetModeMatrix(damageNum, modeNum, modePath, damageType):
     Read mode file and reuturn a square matrix containing UZ for plotting
     '''
     filePath = os.path.join(modePath, f'{damageNum}_Mode{modeNum}.txt')
-    damageDF = pd.read_csv(filePath, sep=r'\s+',  index_col=0, names=['NodeNum', 'X', 'Y', 'Z', 'UX', 'UY', 'UZ'], skiprows=1).drop(['UX', 'UY'], axis=1)
+    damageDF = pd.read_csv(filePath, sep=r'\s+',  index_col=0, names=['NodeNum', 'X', 'Y', 'Z', 'UX', 'UY', 'UZ'],
+                           skiprows=1).drop(['UX', 'UY'], axis=1)
     damageDF = damageDF.drop(damageDF[damageDF.Z != 0].index).drop(['Z'], axis=1)
     damageDF = damageDF.drop_duplicates(subset=['X', 'Y'], keep='last')
     if damageType == 'core':
